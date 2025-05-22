@@ -41,7 +41,7 @@ bedtime_story/
 ├── style.py                 # Storyteller voice randomization
 ├── prompt.txt               # Structured instructions for story creation
 ├── requirements.txt         # Has all the libraries
-├── .env                     # API key storage
+├── .env                     # API key storage (You need to make one)
 └── README.md                # Documentation and explanation
 ```
 
