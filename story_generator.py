@@ -4,6 +4,7 @@ import json
 import random
 from judge import judge_story
 from style import get_storyteller_intro
+from valo_story_utils import is_valorant_request, fetch_valorant_story_seed
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -48,9 +49,20 @@ def query_model(messages):
 def generate_story(user_request):
     """
     Create a bedtime story using the base prompt and user request.
+    If the request is Valorant-related, incorporates live match data.
     """
     style_prompt = get_storyteller_intro()
-    full_prompt = style_prompt + "\n\n" + base_prompt + f'\n\nUser request: "{user_request}"'
+    
+    # Check if this is a Valorant-related request
+    if is_valorant_request(user_request):
+        # Fetch Valorant story seed and incorporate it into the prompt
+        valorant_seed = fetch_valorant_story_seed()
+        enhanced_request = f"{user_request}\n\nContext for the story: {valorant_seed}"
+        full_prompt = style_prompt + "\n\n" + base_prompt + f'\n\nUser request: "{enhanced_request}"'
+    else:
+        # Regular story generation
+        full_prompt = style_prompt + "\n\n" + base_prompt + f'\n\nUser request: "{user_request}"'
+    
     conversation_history.append({"role": "user", "content": full_prompt})
     response_text = query_model(conversation_history)
     conversation_history.append({"role": "assistant", "content": response_text})
