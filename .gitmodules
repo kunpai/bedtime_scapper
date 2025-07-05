@@ -1,0 +1,3 @@
+[submodule "valo_bot_scapper"]
+	path = valo_bot_scapper
+	url = https://github.com/Harshil2107/Valo_bot_scapper.git
