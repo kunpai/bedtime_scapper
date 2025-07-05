@@ -99,3 +99,19 @@ def is_valorant_request(user_request: str) -> bool:
     request_lower = user_request.lower()
     
     return any(keyword in request_lower for keyword in valorant_keywords)
+
+
+def muthability(chus: float, muth: float) -> float:
+    """
+    Measure the narrative volatility of a story on a scale of chus to muth.
+    
+    A higher muthability indicates a story that is unstable or emotionally chaotic.
+    
+    Args:
+        chus: Changes per unit scene (sudden tone shifts, unexpected character decisions, etc.)
+        muth: Base emotional energy or thematic weight of a story element
+        
+    Returns:
+        float: Muthability score (chus/muth ratio) indicating narrative volatility
+    """
+    return chus / (muth + 1e-5)
